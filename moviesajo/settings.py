@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'pages',
     'customer',
+    'import_export',
+    'testapp',
+    'metadata',
 ]
 
 MIDDLEWARE = [
