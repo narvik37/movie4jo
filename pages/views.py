@@ -51,5 +51,5 @@ def input(request):
 def output(request):
     #recommended_movie = Movie.objects.get(id='30') 이런식으로
     #recommended_movie = Fcuser.objects.get(id=1)
-    
+    #print()
     return render(request, 'output.html')
