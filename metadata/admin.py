@@ -11,7 +11,7 @@ from import_export.widgets import ForeignKeyWidget
 @admin.register(Movie)
 class MovieAdmin(ImportExportModelAdmin):
     list_display = ['id', 'title', 'release_date', 'poster_url', 'director', 'main_actor']
-    search_fields = ['title']
+    search_fields = ['title', 'id']
     pass
 
 @admin.register(Genre)

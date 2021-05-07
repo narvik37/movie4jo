@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>영화사조</title>
+	<link rel="stylesheet" href="/static/bootstrap.css" />
+	<link rel="stylesheet" href="/static/input.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<!--{% if field.errors %}
+    <span style="color: red;">{{ field.errors }}</span>
+    {% endif %}-->
+
+	<div class="container">
+		<br>
+		<h1 class="intro">
+			<br>당신을 위한 영화를 찾아드려요!<br><br>
+		</h1>
+		<br>
+		<h4 class="explain">
+			성별, 나이, 선호하는 장르 2개를 입력하세요
+		</h4>
+
+		<div class="error">
+			{% if form.non_field_errors %}
+			<div class="alert alert-danger" role="alert">
+				{% for error in form.non_field_errors %}
+				{{ error }}
+				{% endfor %}
+			</div>
+			{% endif %}
+		</div>
+		<br>
+		<div class="form-group">
+			<form action="." method="POST">
+				{% csrf_token %}
+				{{ form.as_p }}
+				<button type="submit" class="btn btn-primary btn-lg">제출하기</button>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

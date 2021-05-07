@@ -1,0 +1,20 @@
+
+.intro{
+    /*font-family: 'Nanum Myeongjo',sans-serif; */
+    text-align: center;
+    background-color: mediumaquamarine;
+    color: white;
+}
+.explain{
+    color: mediumaquamarine;
+    padding-left: 60px;
+}
+.form-group{
+    
+    padding-left: 60px;
+}
+.error{
+    padding-left: 60px;
+    position:absolute;
+    font-size: 20px;
+}
