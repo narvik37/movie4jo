@@ -62,6 +62,8 @@ def input(request):
             else:
                 for a in qs:
                     print(a.title)
+                    # if(a.poster_url==''):
+                    #     a.poster_url = 0
                     info_list = []
                     info_list.append(a.title)
                     info_list.append(a.main_actor)
@@ -99,23 +101,16 @@ def search(req):
     m = sort_movies
     sorted_movies = []
     sort = req.POST.get('sort')
-    # print(type(m))
-    # print(m['movies'][0][0])
     
     
     if(sort=='asc'):
         id_title = {}
         for movie in m['movies']:
             id_title[movie[0]] = movie[7]
-        print(id_title)
-        id_title = sorted(id_title.items())
-        print(id_title)
-        print('=========')
-        print(id_title[0][1])
         
-        # for i in range(0, len(sorted_id)):
-        #     if(sorted_id[i] == movie[7]):
-        #         sorted_movies.append(movie)
+        id_title = sorted(id_title.items())
+        print('===sorted id_title===')
+        print(id_title)
         
         for ids in id_title:
             for movie in m['movies']:
@@ -124,9 +119,33 @@ def search(req):
 
         res_data['movies'] = sorted_movies
 
-    # elif(sort=='desc'):
-    
-    # else:
+    elif(sort=='desc'):
+        id_title = {}
+        for movie in m['movies']:
+            id_title[movie[0]] = movie[7]
+        id_title = sorted(id_title.items(), reverse=True)
+        print('===sorted id_title===')
+        print(id_title)
+        
+        for ids in id_title:
+            for movie in m['movies']:
+                if(movie[7] == ids[1]):
+                    sorted_movies.append(movie)
+
+        res_data['movies'] = sorted_movies
+    elif(sort=='rating'):
+        id_rating = {}
+        for movie in m['movies']:
+            id_rating[movie[4]] = movie[7]
+        id_rating = sorted(id_rating.items(), reverse=True)
+        print('===sorted id_rating===')
+        print(id_rating)
+        for ids in id_rating:
+            for movie in m['movies']:
+                if(movie[7] == ids[1]):
+                    sorted_movies.append(movie)
+        
+        res_data['movies'] = sorted_movies
 
     return render(req, 'search.html', res_data)
 

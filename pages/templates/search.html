@@ -40,7 +40,11 @@
         {% endif %}
         {% for movie in movies %}
             <h1>{{ movie.0 }}</h1><br>
-            <img src={{movie.3}}><br>
+            {% if movie.3|length %}
+                <img src={{movie.3}}><br>
+            {% else %}
+                <h2>[No Image.]</h2>
+            {% endif %}
             Director : {{ movie.2 }}<br><br>
             Main Actor : {{ movie.1 }}<br><br>
             Released Date : {{ movie.6 }}<br><br>
