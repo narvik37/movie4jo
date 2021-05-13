@@ -25,7 +25,7 @@ class InputForm(forms.Form):
         data = super().clean()
         sex=data.get('sex')
         age=data.get('age')
-        genres=data.get('genre')
+        genres=data.get('genre', '')
 
         errors = {}
 

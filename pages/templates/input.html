@@ -16,6 +16,22 @@
 	<!--{% if field.errors %}
     <span style="color: red;">{{ field.errors }}</span>
     {% endif %}-->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<div class="container-fluid">
+			<a class="navbar-brand" href="#">영화사조</a>
+			<div>
+				<form action="." method="POST">
+					{% csrf_token %}
+					<input id="searchId" placeholder="영어로 제목을 입력해주세요..." name="search"><button type="submit" class="btn btn-primary btn-lg" onclick="keywords()">검색</button>
+				</form>
+			</div>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+				aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+		</div>
+	</nav>
+	
 
 	<div class="container">
 		<br>
@@ -46,5 +62,17 @@
 		</div>
 	</div>
 </body>
+
+<script>
+	function keywords(){
+		var value = document.getElementById("searchId").value;
+		if(value.length<2){
+			alert("최소 두 글자 이상의 키워드를 입력해주세요.");
+		}
+		
+
+	}
+
+</script>
 
 </html>

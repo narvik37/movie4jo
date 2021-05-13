@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'import_export',
     'testapp',
     'metadata',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [
