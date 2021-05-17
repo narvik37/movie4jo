@@ -3,8 +3,8 @@ from django.http.response import HttpResponse
 from .forms import InputForm
 from metadata.models import Movie, Genre, Movie_Genre
 from operator import itemgetter
-
-# Create your views here.
+from PIL import Image, ImageDraw, ImageFont 
+import textwrap
 
 sort_movies = {}
 
@@ -46,9 +46,17 @@ def input(request):
 
     if(request.method=='POST'):
         search = request.POST.get('search', '')
+        
         age = request.POST.get('age', '')
+        sex = request.POST.get('sex', '')
+        genre = []
+        genre = request.POST.getlist('genre', '')
+
         print('search : ',search)
-        print('age : ',age)
+        print('sex: ', sex, 'type: ',type(sex))
+        print('age : ',age, 'type: ',type(age))
+        print('genre: ',genre, 'type: ',type(genre))
+
         if(len(search)>=2):
             print("======================")
             print('searching keword : ', search)
@@ -85,16 +93,18 @@ def input(request):
         elif(len(search)==0 and len(age)==0):
             print('0 char input!!!')
             return render(request, 'input.html', {'form':form})       
+        
         else:
             form = InputForm(request.POST)
             if form.is_valid():
                 return render(request, 'output.html', {'form':form})
+                # return redirect(request, 'output.html', {'form': form})
             else:
-                return render(request, 'input.html', {'form':form})
-        
+                return render(request, 'input.html', {'form': form})
+
     else:
-        form=InputForm()
-        return render(request, 'input.html', {'form':form})
+        form = InputForm()
+        return render(request, 'input.html', {'form': form})
 
 def search(req):
     res_data = {}
@@ -102,8 +112,8 @@ def search(req):
     sorted_movies = []
     sort = req.POST.get('sort')
     
-    
-    if(sort=='asc'):
+    #정렬
+    if(sort=='a_asc'):
         id_title = {}
         for movie in m['movies']:
             id_title[movie[0]] = movie[7]
@@ -119,7 +129,7 @@ def search(req):
 
         res_data['movies'] = sorted_movies
 
-    elif(sort=='desc'):
+    elif(sort=='a_desc'):
         id_title = {}
         for movie in m['movies']:
             id_title[movie[0]] = movie[7]
@@ -131,7 +141,6 @@ def search(req):
             for movie in m['movies']:
                 if(movie[7] == ids[1]):
                     sorted_movies.append(movie)
-
         res_data['movies'] = sorted_movies
     elif(sort=='rating'):
         id_rating = {}
@@ -147,12 +156,80 @@ def search(req):
         
         res_data['movies'] = sorted_movies
 
+
+    elif(sort=='r_asc'):
+        id_date = {}
+        for movie in m['movies']:
+            id_date[movie[6]] = movie[7]
+        id_date = sorted(id_date.items())
+        print('===sorted id_rating===')
+        print(id_date)
+        for ids in id_date:
+            for movie in m['movies']:
+                if(movie[7] == ids[1]):
+                    sorted_movies.append(movie)
+        
+        res_data['movies'] = sorted_movies
+
+    elif(sort=='r_desc'):
+        id_date = {}
+        for movie in m['movies']:
+            id_date[movie[6]] = movie[7]
+        id_date = sorted(id_date.items(), reverse=True)
+        print('===sorted id_rating===')
+        print(id_date)
+        for ids in id_date:
+            for movie in m['movies']:
+                if(movie[7] == ids[1]):
+                    sorted_movies.append(movie)
+        
+        res_data['movies'] = sorted_movies
+
     return render(req, 'search.html', res_data)
 
+
+def make_image(message):
+
+    # Image size
+    W = 640
+    H = 640
+    bg_color = 'rgb(214, 230, 245)'  # 아이소프트존
+
+    # font setting
+    #font = ImageFont.truetype('NanumSquareRoundR.ttf', size=28)
+    #font = ImageFont.truetype("arial.ttf", size=28)
+    font = ImageFont.load_default()
+    font_color = 'rgb(0, 0, 0)'  # or just 'black'
+    image = Image.new('RGB', (W, H), color=bg_color)
+    draw = ImageDraw.Draw(image)
+
+    # Text wraper to handle long text
+# 40자를 넘어갈 경우 여러 줄로 나눔
+    lines = textwrap.wrap(message, width=40)
+
+    # start position for text
+    x_text = 50
+    y_text = 50
+
+    # 각 줄의 내용을 적음
+    for line in lines:
+        width, height = font.getsize(line)
+        draw.text((x_text, y_text), line, font=font, fill=font_color)
+        y_text += height
+        # height는 글씨의 높이로, 한 줄 적고 나서 height만큼 아래에 다음 줄을 적음
+
+    # 안에 적은 내용을 파일 이름으로 저장
+    #downloads_dir = glib.get_user_special_dir(glib.USER_DIRECTORY_DOWNLOAD)
+    image.save('movie_result.png',format='PNG')
+
 def output(request):
-    #recommended_movie = Movie.objects.get(id='30') 이런식으로
-    #recommended_movie = Fcuser.objects.get(id=1)
-    #print()
+    
+    msg="your movies!"
+    
+    if(request.method == 'POST'):
+        make_image(msg)
+        print("make_image")
+
     return render(request, 'output.html')
 
 def f1(x):

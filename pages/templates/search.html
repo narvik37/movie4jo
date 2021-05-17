@@ -13,6 +13,12 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container-fluid">
 			<a class="navbar-brand" href="/">영화사조</a>
+            <div>
+				<form action="." method="POST">
+					{% csrf_token %}
+					<input id="searchId" placeholder="type in English..." name="search"><button type="submit" class="btn btn-primary btn-lg" onclick="keywords()">검색</button>
+				</form>
+			</div>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
 				aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
@@ -25,8 +31,10 @@
         <form action="/search" method="POST">
             {% csrf_token %}
             <select name="sort">
-                <option value="asc">Ascending Order</option>
-                <option value="desc">Descending Order</option>
+                <option value="a_asc">Alphabet Asc.</option>
+                <option value="a_desc">Alphabet Desc.</option>
+                <option value="r_asc">Oldest</option>
+                <option value="r_desc">Newest</option>
                 <option value="rating">Rating</option>
             </select>
             <button type="submit" class="btn btn-primary btn-lg">Sort</button>
@@ -45,6 +53,7 @@
             {% else %}
                 <h2>[No Image.]</h2>
             {% endif %}
+            <br>
             Director : {{ movie.2 }}<br><br>
             Main Actor : {{ movie.1 }}<br><br>
             Released Date : {{ movie.6 }}<br><br>
@@ -60,6 +69,12 @@
         <button type="button" class="btn btn-outline-primary">{% post_to_twitter "text" post.get_absolute_url "Twitter" %}</button>
         <button type="submit" class="btn btn-primary btn-lg" onclick="location.href='/'">Retry!</button>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 </body>
 
 </html>

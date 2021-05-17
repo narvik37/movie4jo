@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from .variables import input_age, input_genres, input_sex
 
+
 class InputForm(forms.Form):
     CHOICES_SEX = (
         ('man', '남성'),
@@ -21,25 +22,20 @@ class InputForm(forms.Form):
     genre = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple, choices=CHOICES_GENRE, label="선호 장르")
     
+    # genress = []
     def clean(self):
         data = super().clean()
-        sex=data.get('sex')
-        age=data.get('age')
-        genres=data.get('genre', '')
-
-        errors = {}
-
+        #sex=data.get('sex')
+        #age=data.get('age')
+        genres=data.get('genre','')
+        print("################################")
+        print(genres)
+        print("##########################3")
         if (len(genres) != 2):
-            #msg = "오류: 장르를 2개 선택하세요!"
-            #self.add_error('genre',msg)
+            
             raise ValidationError("오류: 장르를 2개 선택하세요!!")
         
-        input_age = age
-        input_sex = sex
-        input_genres = genres
-
-        print("### input data from frontend ###")
-        print(input_age) #int type
-        print(input_sex) #str type
-        print(input_genres) #list type
+        #input_age = age
+        #input_sex = sex
+        #input_genres = genres
         

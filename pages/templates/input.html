@@ -56,7 +56,36 @@
 		<div class="form-group">
 			<form action="." method="POST">
 				{% csrf_token %}
-				{{ form.as_p }}
+				<div class="fieldWrapper">
+					{{ form.sex }}
+				</div>
+				<div class="fieldWrapper">
+					{{ form.age }}
+				</div>
+				<div class="fieldWrapper">
+					{{ form.genre.0 }}
+					{{ form.genre.1 }}
+					{{ form.genre.2 }}
+					{{ form.genre.3 }}
+					{{ form.genre.4 }}
+					{{ form.genre.5 }}
+					{{ form.genre.6 }}
+					{{ form.genre.7 }}
+					{{ form.genre.8 }}
+					{{ form.genre.9 }}
+					{{ form.genre.10 }}
+					{{ form.genre.11 }}
+					{{ form.genre.12 }}
+					{{ form.genre.13 }}
+					{{ form.genre.14 }}
+					{{ form.genre.15 }}
+					{{ form.genre.16 }}
+					{{ form.genre.17 }}
+					{{ form.genre.18 }}
+					{{ form.genre.19 }}
+					{{ form.genre.20 }}
+					{{ form.genre.21 }}
+				</div>
 				<button type="submit" class="btn btn-primary btn-lg">제출하기</button>
 			</form>
 		</div>

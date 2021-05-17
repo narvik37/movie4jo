@@ -34,6 +34,12 @@
         {% load social_share %}
         <button type="button" class="btn btn-outline-primary">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
         <button type="button" class="btn btn-outline-primary">{% post_to_twitter "text" post.get_absolute_url "Twitter" %}</button>
+        
+        <form action="/output" method="POST">
+            {% csrf_token %}
+            <br><span>결과를 사진으로 저장하기 </span>
+            <button type="submit" class="btn btn-outline-primary">Click</button>
+        </form>
         <button type="submit" class="btn btn-primary btn-lg" onclick="location.href='/'">Retry</button>
     </div>
 </body>
