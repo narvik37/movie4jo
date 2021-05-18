@@ -10,6 +10,20 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="height: 100px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href='/' style="font-size: 30px;font-weight: bold;">영화사조: 당신만을 위한 영화 추천</a>
+            <div>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <input id="searchId" placeholder="영화를 검색해보세요! (영어로 제목을 입력)" name="search"
+                        style="width: 450px; font-size: 18px;"><button type="submit" class="btn btn-primary btn-lg"
+                        style="font-size: 22px;font-weight: bold;" onclick="keywords()">검색</button>
+                </form>
+            </div>
+    
+        </div>
+    </nav>
     <div class="container">
         <h1><br>영화 추천 결과 보여주는 페이지 ~<br></h1>
         
@@ -30,17 +44,18 @@
         {% endfor %}
         <br>
         <br>
-        <span>Share on </span>
+        <span style="font-size: 22px;font-weight: bold">Share on </span>
         {% load social_share %}
-        <button type="button" class="btn btn-outline-primary">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
-        <button type="button" class="btn btn-outline-primary">{% post_to_twitter "text" post.get_absolute_url "Twitter" %}</button>
+        <button type="button" class="btn btn-outline-primary" style="font-size: 18px;font-weight: bold">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
+        <button type="button" class="btn btn-outline-primary" style="font-size: 18px;font-weight: bold">{% post_to_twitter "text" post.get_absolute_url "Twitter" %}</button>
         
         <form action="/output" method="POST">
             {% csrf_token %}
-            <br><span>결과를 사진으로 저장하기 </span>
-            <button type="submit" class="btn btn-outline-primary">Click</button>
+            <br><span style="font-size: 22px;font-weight: bold">결과를 사진으로 저장하기 </span>
+            <button type="submit" class="btn btn-outline-primary" style="font-size: 18px;font-weight: bold">Click</button>
         </form>
-        <button type="submit" class="btn btn-primary btn-lg" onclick="location.href='/'">Retry</button>
+        <br>
+        <button type="submit" class="btn btn-primary btn-lg" style="font-size: 22px;font-weight: bold" onclick="location.href='/'">Retry</button>
     </div>
 </body>
 

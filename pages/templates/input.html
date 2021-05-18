@@ -7,86 +7,85 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>영화사조</title>
 	<link rel="stylesheet" href="/static/bootstrap.css" />
-	<link rel="stylesheet" href="/static/input.css">
+	<link rel="stylesheet" href="/static/input.css?after">
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<!--{% if field.errors %}
-    <span style="color: red;">{{ field.errors }}</span>
-    {% endif %}-->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="height: 100px;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="#">영화사조</a>
+			<a class="navbar-brand" href="#" style="font-size: 30px;font-weight: bold;">영화사조: 당신만을 위한 영화 추천</a>
 			<div>
 				<form action="." method="POST">
 					{% csrf_token %}
-					<input id="searchId" placeholder="영어로 제목을 입력해주세요..." name="search"><button type="submit" class="btn btn-primary btn-lg" onclick="keywords()">검색</button>
+					<input id="searchId" placeholder="영화를 검색해보세요! (영어로 제목을 입력)" name="search" style="width: 450px; font-size: 18px;"><button type="submit" class="btn btn-primary btn-lg" style="font-size: 22px;font-weight: bold;"onclick="keywords()">검색</button>
 				</form>
 			</div>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-				aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
+			
 		</div>
 	</nav>
 	
-
 	<div class="container">
-		<br>
+		<!--<br>
 		<h1 class="intro">
 			<br>당신을 위한 영화를 찾아드려요!<br><br>
 		</h1>
-		<br>
-		<h4 class="explain">
-			성별, 나이, 선호하는 장르 2개를 입력하세요
-		</h4>
-
-		<div class="error">
-			{% if form.non_field_errors %}
-			<div class="alert alert-danger" role="alert">
-				{% for error in form.non_field_errors %}
-				{{ error }}
-				{% endfor %}
-			</div>
-			{% endif %}
-		</div>
-		<br>
+		<br>-->
+		
+		
+		<br><br><br>
 		<div class="form-group">
 			<form action="." method="POST">
 				{% csrf_token %}
+				<h4 class="explain">>> 성별을 입력하세요</h4>
 				<div class="fieldWrapper">
 					{{ form.sex }}
 				</div>
+				<br><br>
+				<h4 class="explain">>> 나이를 입력하세요</h4>
 				<div class="fieldWrapper">
 					{{ form.age }}
 				</div>
-				<div class="fieldWrapper">
-					{{ form.genre.0 }}
-					{{ form.genre.1 }}
-					{{ form.genre.2 }}
-					{{ form.genre.3 }}
-					{{ form.genre.4 }}
-					{{ form.genre.5 }}
-					{{ form.genre.6 }}
-					{{ form.genre.7 }}
-					{{ form.genre.8 }}
-					{{ form.genre.9 }}
-					{{ form.genre.10 }}
-					{{ form.genre.11 }}
-					{{ form.genre.12 }}
-					{{ form.genre.13 }}
-					{{ form.genre.14 }}
-					{{ form.genre.15 }}
-					{{ form.genre.16 }}
-					{{ form.genre.17 }}
-					{{ form.genre.18 }}
-					{{ form.genre.19 }}
-					{{ form.genre.20 }}
-					{{ form.genre.21 }}
+				<br><br>
+				<div class="error">
+					{% if form.non_field_errors %}
+					<div class="alert alert-danger" role="alert">
+						{% for error in form.non_field_errors %}
+						{{ error }}
+						{% endfor %}
+					</div>
+					{% endif %}
 				</div>
-				<button type="submit" class="btn btn-primary btn-lg">제출하기</button>
+				<h4 class="explain">>> 선호하는 장르 2개를 고르세요</h4>
+				<div class="fieldWrapper">
+					{{ form.genre.0 }}&nbsp;&nbsp;
+					{{ form.genre.1 }}&nbsp;&nbsp;
+					{{ form.genre.2 }}&nbsp;&nbsp;
+					{{ form.genre.3 }}&nbsp;&nbsp;
+					{{ form.genre.4 }}&nbsp;&nbsp;
+					{{ form.genre.5 }}&nbsp;&nbsp;
+					{{ form.genre.6 }}&nbsp;&nbsp;
+					<br>
+					{{ form.genre.7 }}&nbsp;&nbsp;
+					{{ form.genre.8 }}&nbsp;&nbsp;
+					{{ form.genre.9 }}&nbsp;&nbsp;
+					{{ form.genre.10 }}&nbsp;&nbsp;
+					{{ form.genre.11 }}&nbsp;&nbsp;
+					{{ form.genre.12 }}&nbsp;&nbsp;
+					{{ form.genre.13 }}&nbsp;&nbsp;
+					{{ form.genre.14 }}&nbsp;&nbsp;
+					<br>
+					{{ form.genre.15 }}&nbsp;&nbsp;
+					{{ form.genre.16 }}&nbsp;&nbsp;
+					{{ form.genre.17 }}&nbsp;&nbsp;
+					{{ form.genre.18 }}&nbsp;&nbsp;
+					{{ form.genre.19 }}&nbsp;&nbsp;
+					{{ form.genre.20 }}&nbsp;&nbsp;
+					{{ form.genre.21 }}&nbsp;&nbsp;
+				</div>
+				<br>
+				<button type="submit" class="btn btn-primary btn-lg" style="font-size: 22px;font-weight: bold">제출하기</button>
 			</form>
 		</div>
 	</div>
@@ -98,8 +97,6 @@
 		if(value.length<2){
 			alert("최소 두 글자 이상의 키워드를 입력해주세요.");
 		}
-		
-
 	}
 
 </script>

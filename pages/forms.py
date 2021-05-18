@@ -18,7 +18,7 @@ class InputForm(forms.Form):
         ('war', '전쟁'),('western', '서부'),('tv', 'TV'),('movie', 'movie'),
     )
     sex = forms.ChoiceField(choices=CHOICES_SEX, label="성별")
-    age = forms.IntegerField(label="나이")
+    age = forms.IntegerField(label="나이",widget=forms.TextInput(attrs={'placeholder': '숫자를 입력하세요'}))
     genre = forms.MultipleChoiceField(
         widget=forms.CheckboxSelectMultiple, choices=CHOICES_GENRE, label="선호 장르")
     

@@ -101,7 +101,6 @@ def input(request):
                 # return redirect(request, 'output.html', {'form': form})
             else:
                 return render(request, 'input.html', {'form': form})
-
     else:
         form = InputForm()
         return render(request, 'input.html', {'form': form})

@@ -1,23 +1,18 @@
 
-.intro{
-    /*font-family: 'Nanum Myeongjo',sans-serif; */
-    text-align: center;
-    background-color: mediumaquamarine;
-    color: white;
-}
 .explain{
-    color: mediumaquamarine;
-    padding-left: 60px;
+    color: #78c2ad;
+    font-weight: 500;
 }
+/*
 .form-group{
     
     padding-left: 60px;
-}
+}*/
 .error{
-    padding-left: 60px;
-    position:absolute;
+    /*padding-left: 60px;
+    position:absolute;*/
     font-size: 20px;
 }
-.fieldWrappers{
-    font-size: 15px;
+.fieldWrapper{
+    font-size: 18px;
 }

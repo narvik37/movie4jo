@@ -10,21 +10,20 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-		<div class="container-fluid">
-			<a class="navbar-brand" href="/">영화사조</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="height: 100px;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href='/' style="font-size: 30px;font-weight: bold;">영화사조: 당신만을 위한 영화 추천</a>
             <div>
-				<form action="." method="POST">
-					{% csrf_token %}
-					<input id="searchId" placeholder="type in English..." name="search"><button type="submit" class="btn btn-primary btn-lg" onclick="keywords()">검색</button>
-				</form>
-			</div>
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
-				aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-		</div>
-	</nav>
+                <form action="." method="POST">
+                    {% csrf_token %}
+                    <input id="searchId" placeholder="영화를 검색해보세요! (영어로 제목을 입력)" name="search"
+                        style="width: 450px; font-size: 18px;"><button type="submit" class="btn btn-primary btn-lg"
+                        style="font-size: 22px;font-weight: bold;" onclick="keywords()">검색</button>
+                </form>
+            </div>
+    
+        </div>
+    </nav>
     <br>
     <br>
     <div class="container">
