@@ -1,0 +1,45 @@
+
+ 
+<html lang="en">
+ 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+ 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+ 
+    <title>Document</title>
+</head>
+<body>
+    <div id="loading">
+       <img src="/movie_result.png" alt="" >
+    </div>
+</body>
+<style>
+    #loading{
+        padding-top: 40;
+        margin-left: 10;
+    }
+    img{
+     position: absolute;
+ 
+     height: 85%;
+     text-align:center;
+    }
+    
+</style>
+ 
+<script>
+   
+    
+ 
+    
+    $(document).ready(function(){
+        setTimeout(function(){
+            if (window.location == 'http://127.0.0.1:8000/' ) {
+            window.location.href='http://127.0.0.1:8000/output';}}, 1000)
+        })
+       
+</script>
+</html>

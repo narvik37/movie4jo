@@ -98,8 +98,11 @@ def input(request):
         else:
             form = InputForm(request.POST)
             if form.is_valid():
-                return render(request, 'output.html', {'form':form})
-                # return redirect(request, 'output.html', {'form': form})
+                res_data = {}
+                res_data['age'] = age
+                res_data['sex'] = sex
+                res_data['genre'] = genre
+                return render(request, 'loading.html', res_data)
             else:
                 return render(request, 'input.html', {'form': form})
     else:
@@ -218,17 +221,18 @@ def make_image(message):
     # 안에 적은 내용을 파일 이름으로 저장
     #downloads_dir = glib.get_user_special_dir(glib.USER_DIRECTORY_DOWNLOAD)
     #path="C:/Users/{}/desktop".format(os.getlogin())
-    image.save('movie_result.png',format='PNG')
+    image.save('./static/movie_result.png',format='PNG')
 
 def output(request):
-    
-    msg="your movies!"
-    
-    if(request.method == 'POST'):
-        make_image(msg)
-        print(format(os.getlogin()))
+    msg="2021-05-18 10:02 PM"
+    make_image(msg)
+    #if(request.method == 'POST'):
 
     return render(request, 'output.html')
 
 def f1(x):
     return x[0]
+
+def loading(req):
+    print(req)
+    return render(req, 'loading.html')

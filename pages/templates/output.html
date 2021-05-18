@@ -52,7 +52,8 @@
         <form action="/output" method="POST">
             {% csrf_token %}
             <br><span style="font-size: 22px;font-weight: bold">결과를 사진으로 저장하기 </span>
-            <button type="submit" class="btn btn-outline-primary" style="font-size: 18px;font-weight: bold">Click</button>
+            <a href="/static/movie_result.png" download="moviesajo.png" style="font-size: 22px;font-weight: bold">Click</a>
+
         </form>
         <br>
         <button type="submit" class="btn btn-primary btn-lg" style="font-size: 22px;font-weight: bold" onclick="location.href='/'">Retry</button>
