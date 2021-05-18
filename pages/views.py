@@ -3,6 +3,7 @@ from django.http.response import HttpResponse
 from .forms import InputForm
 from metadata.models import Movie, Genre, Movie_Genre
 from operator import itemgetter
+import os
 from PIL import Image, ImageDraw, ImageFont 
 import textwrap
 
@@ -194,10 +195,7 @@ def make_image(message):
     H = 640
     bg_color = 'rgb(214, 230, 245)'  # 아이소프트존
 
-    # font setting
-    #font = ImageFont.truetype('NanumSquareRoundR.ttf', size=28)
-    #font = ImageFont.truetype("arial.ttf", size=28)
-    font = ImageFont.load_default()
+    font = ImageFont.truetype("./static/arial.ttf", size=28)
     font_color = 'rgb(0, 0, 0)'  # or just 'black'
     image = Image.new('RGB', (W, H), color=bg_color)
     draw = ImageDraw.Draw(image)
@@ -219,6 +217,7 @@ def make_image(message):
 
     # 안에 적은 내용을 파일 이름으로 저장
     #downloads_dir = glib.get_user_special_dir(glib.USER_DIRECTORY_DOWNLOAD)
+    #path="C:/Users/{}/desktop".format(os.getlogin())
     image.save('movie_result.png',format='PNG')
 
 def output(request):
@@ -227,7 +226,7 @@ def output(request):
     
     if(request.method == 'POST'):
         make_image(msg)
-        print("make_image")
+        print(format(os.getlogin()))
 
     return render(request, 'output.html')
 
