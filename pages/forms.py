@@ -28,9 +28,6 @@ class InputForm(forms.Form):
         #sex=data.get('sex')
         #age=data.get('age')
         genres=data.get('genre','')
-        print("################################")
-        print(genres)
-        print("##########################3")
         if (len(genres) != 2):
             
             raise ValidationError("오류: 장르를 2개 선택하세요!!")

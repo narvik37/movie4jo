@@ -62,11 +62,6 @@
         {% endfor %}
         <br>
         <br>
-        <span>Share on </span>
-        {% load social_share %}
-        <button type="button" class="btn btn-outline-primary">{% post_to_facebook post.get_absolute_url "Facebook" %}</button>
-        <button type="button" class="btn btn-outline-primary">{% post_to_twitter "text" post.get_absolute_url "Twitter" %}</button>
-        <button type="submit" class="btn btn-primary btn-lg" onclick="location.href='/'">Retry!</button>
     </div>
     <br>
     <br>

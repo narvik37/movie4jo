@@ -102,6 +102,10 @@ def input(request):
                 res_data['age'] = age
                 res_data['sex'] = sex
                 res_data['genre'] = genre
+
+                request.session['age'] = age
+                request.session['sex'] = sex
+                request.session['genre'] = genre
                 return render(request, 'loading.html', res_data)
             else:
                 return render(request, 'input.html', {'form': form})
@@ -203,36 +207,34 @@ def make_image(message):
     image = Image.new('RGB', (W, H), color=bg_color)
     draw = ImageDraw.Draw(image)
 
+
     # Text wraper to handle long text
 # 40자를 넘어갈 경우 여러 줄로 나눔
-    lines = textwrap.wrap(message, width=40)
+#    lines = textwrap.wrap(message, width=40)
 
     # start position for text
-    x_text = 50
-    y_text = 50
+#    x_text = 50
+#    y_text = 50
 
     # 각 줄의 내용을 적음
-    for line in lines:
-        width, height = font.getsize(line)
-        draw.text((x_text, y_text), line, font=font, fill=font_color)
-        y_text += height
+#    for line in lines:
+#        width, height = font.getsize(line)
+#        draw.multiline_text((x_text, y_text), line, font=font, fill=font_color)
+#        y_text += height
+        
         # height는 글씨의 높이로, 한 줄 적고 나서 height만큼 아래에 다음 줄을 적음
-
+    draw.multiline_text((10,10),message, font=font, fill=font_color)
     # 안에 적은 내용을 파일 이름으로 저장
     #downloads_dir = glib.get_user_special_dir(glib.USER_DIRECTORY_DOWNLOAD)
     #path="C:/Users/{}/desktop".format(os.getlogin())
     image.save('./static/movie_result.png',format='PNG')
 
 def output(request):
-    msg="2021-05-18 10:02 PM"
+    msg="Recommended Movie List\n1.Get out\n2.Home Alone\n"+"3.What's up"
     make_image(msg)
-    #if(request.method == 'POST'):
-
-    return render(request, 'output.html')
-
-def f1(x):
-    return x[0]
-
-def loading(req):
-    print(req)
+    age = request.session['age']
+    sex = request.session['sex']
+    genre = request.session['genre']
+    print('here is output')
+    print('here is loading')
     return render(req, 'loading.html')

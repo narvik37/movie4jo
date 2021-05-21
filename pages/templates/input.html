@@ -38,12 +38,12 @@
 		<div class="form-group">
 			<form action="." method="POST">
 				{% csrf_token %}
-				<h4 class="explain">>> 성별을 입력하세요</h4>
+				<h4 class="explain">>> <strong>성별</strong>을 입력하세요</h4>
 				<div class="fieldWrapper">
 					{{ form.sex }}
 				</div>
 				<br><br>
-				<h4 class="explain">>> 나이를 입력하세요</h4>
+				<h4 class="explain">>> <strong>나이</strong>를 입력하세요</h4>
 				<div class="fieldWrapper">
 					{{ form.age }}
 				</div>
@@ -57,7 +57,7 @@
 					</div>
 					{% endif %}
 				</div>
-				<h4 class="explain">>> 선호하는 장르 2개를 고르세요</h4>
+				<h4 class="explain">>> 선호하는 <strong>장르 2개</strong>를 고르세요</h4>
 				<div class="fieldWrapper">
 					{{ form.genre.0 }}&nbsp;&nbsp;
 					{{ form.genre.1 }}&nbsp;&nbsp;
