@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from import_export.admin import ImportExportModelAdmin
-from .models import Genre, Movie, Movie_Genre
+from .models import Genre, Movie, Movie_Genre, First_Genre
 
 from import_export import resources, fields
 from import_export.widgets import ForeignKeyWidget
@@ -21,6 +21,12 @@ class MovieAdmin(ImportExportModelAdmin):
     pass
 
 @admin.register(Movie_Genre)
+class MovieAdmin(ImportExportModelAdmin):
+    list_display = ['movie_id', 'genre_id']
+    search_fields = ['movie_id']
+    pass
+
+@admin.register(First_Genre)
 class MovieAdmin(ImportExportModelAdmin):
     list_display = ['movie_id', 'genre_id']
     search_fields = ['movie_id']

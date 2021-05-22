@@ -54,3 +54,18 @@ class Movie_Genre(models.Model):
         
     def __str__(self):
         return self.movie_id
+
+class First_Genre(models.Model):
+    movie_id = models.CharField(max_length=16, verbose_name="movie_id", default='')
+    genre_id = models.CharField(max_length=16, verbose_name="genre_id", default='')
+
+    created = models.DateTimeField(auto_now_add=True, verbose_name="register_time")
+    update = models.DateTimeField(auto_now_add=True, verbose_name="modify_time")
+
+    class Meta:
+        db_table = "first_genre"
+        verbose_name = "First_Genre"
+        verbose_name_plural = "First_Genre"
+        
+    def __str__(self):
+        return self.movie_id
