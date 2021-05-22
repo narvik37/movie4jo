@@ -9,13 +9,13 @@ class InputForm(forms.Form):
         ('woman', '여성'),
     )
     CHOICES_GENRE = (
-        ('animation', '애니메이션'),('comedy', '코미디'),('family', '가족'),
-        ('adventure', '모험'),('fantasy', '판타지'),('romance', '로맨스'),
-        ('drama', '드라마'),('action', '액션'),('crime', '범죄'),
-        ('thriller', '스릴러'),('horror', '공포'),('history', '역사'),
-        ('science', '과학'),('fiction', '소설'),('mystery', '미스터리'),
-        ('foreign', '이국적인'),('music', '음악'),('documentary', '다큐멘터리'),
-        ('war', '전쟁'),('western', '서부'),('tv', 'TV'),('movie', 'movie'),
+        ('Animation', '애니메이션'),('Comedy', '코미디'),('Family', '가족'),
+        ('Adventure', '모험'),('Fantasy', '판타지'),('Romance', '로맨스'),
+        ('Drama', '드라마'),('Action', '액션'),('Crime', '범죄'),
+        ('Thriller', '스릴러'),('Horror', '공포'),('History', '역사'),
+        ('Science', '과학'),('Fiction', '소설'),('Mystery', '미스터리'),
+        ('Foreign', '이국적인'),('Music', '음악'),('Documentary', '다큐멘터리'),
+        ('War', '전쟁'),('Western', '서부'),('TV', 'TV'),('Movie', 'movie'),
     )
     sex = forms.ChoiceField(choices=CHOICES_SEX, label="성별")
     age = forms.IntegerField(label="나이",widget=forms.TextInput(attrs={'placeholder': '숫자를 입력하세요'}))

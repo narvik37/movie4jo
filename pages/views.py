@@ -236,5 +236,8 @@ def output(request):
     sex = request.session['sex']
     genre = request.session['genre']
     print('here is output')
+    return render(request, 'output.html')
+
+def loading(request):
     print('here is loading')
-    return render(req, 'loading.html')
+    return render(request, 'loading.html')
