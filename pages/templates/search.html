@@ -37,7 +37,6 @@
                 <option value="rating">Rating</option>
             </select>
             <button type="submit" class="btn btn-primary btn-lg">Sort</button>
-            <button type="button" class="btn btn-primary btn-lg" onclick="location.href='/'">Retry</button>
         </form>
     </div>
     <div class="container">
@@ -52,6 +51,12 @@
             {% else %}
                 <h2>[No Image.]</h2>
             {% endif %}
+            <br>
+            Genre : |
+            {% for genre in movie.8 %}
+                {{ genre }} |
+            {% endfor %}
+            <br>
             <br>
             Director : {{ movie.2 }}<br><br>
             Main Actor : {{ movie.1 }}<br><br>

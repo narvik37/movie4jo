@@ -24,17 +24,41 @@
     
         </div>
     </nav>
+    <br>
+    <br>
     <div class="container">
-        <h1><br>영화 추천 결과 보여주는 페이지 ~<br></h1>
-        
-        <!--<button class="btn btn-primary btn-block" onclick="location.href=''>Retry! </button>-->
+        <form action="/output" method="POST">
+            {% csrf_token %}
+            <select name="sort">
+                <option value="a_asc">Alphabet Asc.</option>
+                <option value="a_desc">Alphabet Desc.</option>
+                <option value="r_asc">Oldest</option>
+                <option value="r_desc">Newest</option>
+                <option value="rating">Rating</option>
+            </select>
+            <button type="submit" class="btn btn-primary btn-lg">Sort</button>
+        </form>
+    </div>
+
+    <div class="container">
         <br>
         {% if '1' in nothing %}
             <h2>No Movies found.</h2>
         {% endif %}
         {% for movie in movies %}
             <h1>{{ movie.0 }}</h1><br>
-            <img src={{movie.3}}><br>
+            {% if movie.3|length %}
+                <img src={{movie.3}}><br>
+            {% else %}
+                <h2>[No Image.]</h2>
+            {% endif %}
+            <br>
+            Genre : |
+            {% for genre in movie.8 %}
+                {{ genre }} |
+            {% endfor %}
+            <br>
+            <br>
             Director : {{ movie.2 }}<br><br>
             Main Actor : {{ movie.1 }}<br><br>
             Released Date : {{ movie.6 }}<br><br>
@@ -57,6 +81,7 @@
         </form>
         <br><br>
         <button type="submit" class="btn btn-primary btn-lg" style="font-size: 22px;font-weight: bold" onclick="location.href='/'">Retry</button>
+        <br><br><br><br><br><br><br><br><br><br>
     </div>
 </body>
 

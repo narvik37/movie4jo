@@ -6,7 +6,7 @@ class Genre(models.Model):
     id = models.CharField(max_length=16, verbose_name="genre_id", primary_key=True, default='')
     genre_name = models.CharField(max_length=32, verbose_name="genre_name", default='')
 
-    created = models.DateTimeField(auto_now_add=True, verbose_name="register_time")
+    created = models.DateTimeField(auto_now_add=True, verbose_name="register_time", null=True)
     update = models.DateTimeField(auto_now_add=True, verbose_name="modify_time")
 
     class Meta:

@@ -1,12 +1,11 @@
-
- 
+<!DOCTYPE html>
 <html lang="en">
  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
- 
+    <title>영화사조</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
  
     <title>Document</title>
@@ -19,25 +18,23 @@
 <style>
     #loading{
         padding-top: 100;
-        /*margin-left: 10;*/
         text-align: center;
     }
     img{
-     /*position: absolute;*/
- 
      height: 70%;
-     /*text-align:center;*/
     }
     
 </style>
  
+
 <script>
     
     $(document).ready(function(){
         setTimeout(function(){
-            if (window.location == 'http://27.96.134.7:8000/' ) {
-            window.location.href='http://27.96.134.7:8000/output';}}, 1000)
+            if (window.location == 'http://27.96.134.7:8000/loading' ) {
+            window.location.href='http://27.96.134.7:8000/output';}}, 100)
         })
        
 </script>
+
 </html>
