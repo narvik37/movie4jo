@@ -14,7 +14,7 @@ class InputForm(forms.Form):
         ('Thriller', '스릴러'),('Horror', '공포'),('History', '역사'),
         ('Science', '과학'),('Fiction', '소설'),('Mystery', '미스터리'),
         ('Foreign', '이국적인'),('Music', '음악'),('Documentary', '다큐멘터리'),
-        ('War', '전쟁'),('Western', '서부'),('TV', 'TV'),('Movie', 'movie'),
+        ('War', '전쟁'),('Western', '서부'),('TV', 'TV'),('Movie', '무비'),
     )
         
     sex = forms.ChoiceField(choices=CHOICES_SEX, label="성별")

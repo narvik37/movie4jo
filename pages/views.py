@@ -4,7 +4,7 @@ from .forms import InputForm
 from metadata.models import Movie, Genre, Movie_Genre, First_Genre
 from operator import itemgetter
 from PIL import Image, ImageDraw, ImageFont 
-from .AImodels.model1 import ModelFirst
+from .AImodels.model1_v2 import ModelFirst
 
 import tensorflow as tf
 import numpy as np
@@ -13,7 +13,6 @@ import operator
 import os
 import datetime
 import random
-
 
 sort_movies = {}
 
@@ -32,7 +31,6 @@ def index(req):
     return render(req, 'index.html', res_data)
 
 
-
 def input(request):
     movies = []
     form=InputForm()
@@ -46,9 +44,9 @@ def input(request):
         genre = request.POST.getlist('genre', '')
 
         if(len(search)>=2):
-            print("======================")
+            print("\n\n================================")
             print('searching keword : ', search)
-            print("======================")
+            print("================================")
             res_data = {}#전송할 res_data 생성
 
             qs = Movie.objects.filter(title__contains=search)
@@ -92,7 +90,10 @@ def input(request):
                 request.session['age'] = age
                 request.session['sex'] = sex
                 request.session['genre'] = genre
-                
+                print("\n\n>> Input values")
+                print("age: ",age)
+                print("sex: ",sex)
+                print("genre: ",genre)
                 return redirect('/loading_')
             else:
                 return render(request, 'input.html', {'form': form})
@@ -113,7 +114,7 @@ def search(req):
             id_title[movie[0]] = movie[7]
         
         id_title = sorted(id_title.items())
-        print('===sorted id_title(asc)===')
+        print('\n\n=== sorted id_title(asc) ===')
         print(id_title)
         
         for ids in id_title:
@@ -128,7 +129,7 @@ def search(req):
         for movie in m['movies']:
             id_title[movie[0]] = movie[7]
         id_title = sorted(id_title.items(), reverse=True)
-        print('===sorted id_title(desc)===')
+        print('\n\n=== sorted id_title(desc) ===')
         print(id_title)
         
         for ids in id_title:
@@ -141,7 +142,7 @@ def search(req):
         for movie in m['movies']:
             id_rating[movie[4]] = movie[7]
         id_rating = sorted(id_rating.items(), reverse=True)
-        print('===sorted id_rating===')
+        print('\n\n=== sorted id_rating ===')
         print(id_rating)
         for ids in id_rating:
             for movie in m['movies']:
@@ -156,7 +157,7 @@ def search(req):
         for movie in m['movies']:
             id_date[movie[6]] = movie[7]
         id_date = sorted(id_date.items())
-        print('===sorted date(asc)===')
+        print('\n\n=== sorted date(asc) ===')
         print(id_date)
         for ids in id_date:
             for movie in m['movies']:
@@ -170,7 +171,7 @@ def search(req):
         for movie in m['movies']:
             id_date[movie[6]] = movie[7]
         id_date = sorted(id_date.items(), reverse=True)
-        print('===sorted date(desc)===')
+        print('\n\n=== sorted date(desc) ===')
         print(id_date)
         for ids in id_date:
             for movie in m['movies']:
@@ -183,7 +184,7 @@ def search(req):
 
 def make_image(message):####################
     # Image size
-    W = 1280
+    W = 1000
     H = 700
     bg_color = 'rgb(214, 230, 245)'  # 아이소프트존
 
@@ -204,7 +205,7 @@ def output(request):
     sex = request.session['sex']
     genre = request.session['genre']
     movieId_list = request.session['movie_list']
-    
+    movie_score_list = request.session['movie_score_list'] #평점정보
     
     res_data['age'] = age
     res_data['sex'] = sex
@@ -215,7 +216,7 @@ def output(request):
     movie_list = []
 
     movies = []
-    print('--영화 추천 결과--')####################
+    print('\n\n>> 영화 추천 결과')####################
     for i in range(len(movieId_list)):
         a = Movie.objects.get(id=movieId_list[i])
         info_list = []
@@ -235,6 +236,7 @@ def output(request):
             gn = Genre.objects.get(id=g.genre_id)
             genre_names.append(str(gn))
         info_list.append(genre_names)
+        info_list.append(movie_score_list[i])
         movies.append(info_list)
         res_data['movies'] = movies#res_data에 넣어주기
         sort_movies['movies'] = movies#sort_movies에 넣어주기(sort용 변수)
@@ -329,8 +331,7 @@ def output(request):
     return render(request, 'output.html', res_data)
 
 def loading(request):
-    print('here is loading')
-    #res_data={}
+    
     flag=0
     
     age = int(request.session['age'])
@@ -340,15 +341,14 @@ def loading(request):
         sex=77
     else:
         sex=70
-    #print(age, sex, genre)
 
     # model 1####################
-    print("Model1 시작: ",datetime.datetime.now())
+    print("\n\n>> Model1 시작: ",datetime.datetime.now())
     mf = ModelFirst()
     result = mf.model1(genre)
-    print("추천된 장르(model1): ",result)
+    print(">> 추천된 장르(model1): ",result,"\n\n")
     
-    print("Model2에 넣을 데이터처리 시작: ",datetime.datetime.now())
+    #print(">> Model2에 넣을 데이터처리 시작: ",datetime.datetime.now())
     new_result=[]
 
     # genre_id함수를 통해 장르 이름을 id값으로 반환해주는 반복문
@@ -394,7 +394,7 @@ def loading(request):
     id_score_dict = {} # movieID, 선호도 저장할 딕셔너리
 
     
-    print("Model2 시작: ",datetime.datetime.now())
+    print("\n\n>> Model2 시작: ",datetime.datetime.now())
 
     ####################
     # genre 1 CNN 돌리기
@@ -423,24 +423,31 @@ def loading(request):
         predictions = model2.predict(samples_to_predict)
         id_score_dict[genre3_list[i]]=predictions[0][0]
 
-    print("Model2 끝: ",datetime.datetime.now())
+    #print(">> Model2 끝: ",datetime.datetime.now())
 
 
     # 매칭시켜서 저장해놓은 딕셔너리에서 사용자의 선호도 top 10개 영화 id 찾기
     sorted_dict = sorted(id_score_dict.items(), reverse=True, key=operator.itemgetter(1))
+    print("\n\n>> 영화id, 예상평점")
+    print(sorted_dict)
     
-    recommended_movies = []
-    
+    recommended_movies_id = []
+    recommended_movies_score = []
+
     for i in range(20):#정렬된 영화를 순차적으로 추천 영화에 넣어주기
-        recommended_movies.append(sorted_dict[i][0])
+        recommended_movies_id.append(sorted_dict[i][0])
+        recommended_movies_score.append(str(sorted_dict[i][1]))
+    
+    print("\n\n>> 예상평점 상위 20개 영화의 id, 예상평점")
+    for i in range(20):
+        print(recommended_movies_id[i],end='')
+        print(", ",recommended_movies_score[i])
 
-
-    #res_data['movie_list'] = recommended_movies
-    request.session['movie_list'] = recommended_movies
+    request.session['movie_list'] = recommended_movies_id
+    request.session['movie_score_list']= recommended_movies_score
 
     flag=1
     if(flag==1):
-        print("loading 페이지 끝: ",datetime.datetime.now())
         return redirect('/output')
 
     return render(request, 'loading.html')
